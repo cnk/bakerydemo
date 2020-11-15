@@ -175,4 +175,20 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 # Wagtail settings
-WAGTAIL_SITE_NAME = "bakerydemo"
+WAGTAIL_SITE_NAME = 'bakerydemo'
+
+WAGTAILEMBEDS_FINDERS = [
+    {'class': 'wagtail.embeds.finders.instagram',
+     'app_id': os.environ.get('INSTAGRAM_APP_ID', ''),
+     'app_secret': os.environ.get('INSTAGRAM_APP_SECRET', ''),
+     'omitscript': os.environ.get('INSTAGRAM_OMITSCRIPT', False),
+     },
+    {'class': 'wagtail.embeds.finders.facebook',
+     'app_id': os.environ.get('FACEBOOK_APP_ID', ''),
+     'app_secret': os.environ.get('FACEBOOK_APP_SECRET', ''),
+     'omitscript': os.environ.get('FACEBOOK_OMITSCRIPT', False),
+     },
+    # Handles all other oEmbed providers the default way
+    {'class': 'wagtail.embeds.finders.oembed'},
+]
+WAGTAILEMBEDS_RESPONSIVE_HTML = True
