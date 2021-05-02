@@ -57,6 +57,26 @@ DATABASES = {
 EOF
 fi
 
+# The base image use in BakeryDemo's Vagrantfile has elasticsearch 5 installed and running automatically
+if [ -n "$USE_ELASTICSEARCH" ]
+then
+    echo Configuring elasticsearch.....
+    su - $DEV_USER -c "$PIP install \"elasticsearch>=5.0.0,<6.0.0\""
+    cat << EOF >> $PROJECT_DIR/bakerydemo/settings/local.py
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.elasticsearch5',
+        'URLS': ['http://localhost:9200'],
+        'INDEX': 'wagtail',
+        'TIMEOUT': 5,
+        'OPTIONS': {},
+        'INDEX_SETTINGS': {},
+    }
+}
+EOF
+fi
+
 # Run syncdb/migrate/load_initial_data/update_index
 su - $DEV_USER -c "$PYTHON $PROJECT_DIR/manage.py migrate --noinput && \
                    $PYTHON $PROJECT_DIR/manage.py load_initial_data && \

@@ -69,7 +69,8 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
-  config.vm.provision :shell, :path => "vagrant/provision.sh", :args => "bakerydemo"
+  config.vm.provision :shell, :path => "vagrant/provision.sh", :args => "bakerydemo",
+    :env => {"USE_POSTGRESQL" => true, "USE_ELASTICSEARCH" => true }
 
   # Enable agent forwarding over SSH connections.
   config.ssh.forward_agent = true
