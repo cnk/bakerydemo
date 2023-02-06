@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.simple_translation",
     "wagtail.contrib.styleguide",
     "wagtail",
+    "wagtail_hallo",
     "rest_framework",
     "modelcluster",
     "taggit",
@@ -194,3 +195,10 @@ WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     ("de", "Deutsch"),
     ("ar", "العربيّة"),
 ]
+
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'default': {
+        # 'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
+        'WIDGET': 'wagtail_hallo.hallo.HalloRichTextArea',
+    },
+}
