@@ -202,6 +202,19 @@ WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     ("ar", "العربيّة"),
 ]
 
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'default': {
+        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
+    },
+    # Minimal editor allowing only inline styles
+    'inline': {
+        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
+        'OPTIONS': {
+            'features': ['bold', 'italic', 'link', 'document-link', 'superscript', 'subscript', 'strikethrough']
+        }
+    },
+}
+
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "changeme")
 
 # Content Security policy settings

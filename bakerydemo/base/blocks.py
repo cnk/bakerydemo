@@ -1,11 +1,19 @@
 from wagtail.blocks import (
     CharBlock,
     ChoiceBlock,
+    DateBlock,
+    DateTimeBlock,
+    EmailBlock,
+    FloatBlock,
+    IntegerBlock,
     RichTextBlock,
     StreamBlock,
     StructBlock,
     TextBlock,
 )
+from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.contrib.typed_table_block.blocks import TypedTableBlock
+from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
@@ -77,3 +85,14 @@ class BaseStreamBlock(StreamBlock):
         icon="media",
         template="blocks/embed_block.html",
     )
+    table_block = TableBlock()
+    typed_table_block = TypedTableBlock([
+        ('text', CharBlock()),
+        ('integer', IntegerBlock()),
+        ('numeric', FloatBlock()),
+        ('rich_text', RichTextBlock(required=False, editor="inline")),
+        ('document', DocumentChooserBlock()),
+        ('date', DateBlock(required=False)),
+        ('datetime', DateTimeBlock(required=False)),
+        ('email', EmailBlock(required=False)),
+    ])
